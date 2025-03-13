@@ -9,4 +9,7 @@ public interface PlayerRepository extends JpaRepository<Player, String> {
 
     @Override
     Optional<Player> findById(String name);
+
+
+    Optional<Player> findByName(String name);
 }
