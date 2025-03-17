@@ -14,16 +14,27 @@ public class Player {
     private String name;
     private String nation;
     private String pos;
+    @Column(name = "Age")
     private Integer age;
+    @Column(name = "MP")
     private Integer mp;
+    @Column(name = "Starts")
     private Integer starts;
+    @Column(name = "Min")
     private Double min;
+    @Column(name = "Gls")
     private Double gls;
+    @Column(name = "Ast")
     private Double ast;
+    @Column(name = "PK")
     private Double pk;
+    @Column(name = "CrdY")
     private Double crdy;
+    @Column(name = "CrdR")
     private Double crdr;
+    @Column(name = "xG")
     private Double xg;
+    @Column(name = "xAG")
     private Double xag;
     private String team;
 
