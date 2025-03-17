@@ -1,2 +1,9 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+
+
+@theme {
+    --font-display: "Satoshi", "sans-serif";
+
+    --league-color: #37003c;
+}
