@@ -26,7 +26,7 @@
         </a>
 	</div>
 	<div class="col-span-2 grid content-center justify-items-center">
-        <a href="/data">
+        <a href="/player_data">
 			<Icon src={TableCells} size="40" class="cursor-pointer hover:h-[50px] hover:w-[50px]" />
 		</a>
 	</div>
