@@ -7,7 +7,7 @@
 <div class="grid grid-cols-12 content-center bg-(--league-color) text-white">
 	<img src="images/circularLogo.png" class="col-span-2 ml-5" alt="premierLeagueLogo" width="80" />
 	<div class="col-span-2 grid content-center justify-items-center">
-		<a href="/home" class="">
+		<a href="/" class="">
 			<Icon
 				src={Home}
 				size="40"
@@ -21,7 +21,7 @@
 		</a>
 	</div>
 	<div class="col-span-2 grid content-center justify-items-center">
-        <a href="/countriesd">
+        <a href="/countries">
 		    <Icon src={Flag} size="40" class="cursor-pointer hover:h-[50px] hover:w-[50px]" />
         </a>
 	</div>
