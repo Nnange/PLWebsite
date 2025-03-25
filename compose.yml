@@ -16,11 +16,11 @@ services:
       context: ./premier-zone
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "9090:9090"
     networks:
       - football-network
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_PROFILES_ACTIVE=local
 
 networks:
   football-network:
