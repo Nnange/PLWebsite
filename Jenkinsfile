@@ -22,12 +22,13 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 dir(FRONTEND_DIR) {
-                    withCredentials([
-                    string(credentialsId: 'PUBLIC_BACKEND_URL', variable: 'PUBLIC_BACKEND_URL')
-                    ])
                     sh 'npm install'
+                    withCredentials([
+                        string(credentialsId: 'PUBLIC_BACKEND_URL', variable: 'PUBLIC_BACKEND_URL')
+                    ]) {
                     // sh 'npm run test'  // Jest testing
-                    sh 'npm run build --build-arg PUBLIC_BACKEND_URL=${PUBLIC_BACKEND_URL}'
+                        sh 'npm run build '
+                    }
                 }
             }
         }
