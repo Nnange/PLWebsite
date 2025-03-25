@@ -46,6 +46,7 @@ pipeline {
                     '''
                     sh 'mvn clean'  
                     sh 'mvn package -DskipTests'
+                    }
                 }
             }
         }
