@@ -22,9 +22,12 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 dir(FRONTEND_DIR) {
+                    withCredentials([
+                    string(credentialsId: 'PUBLIC_BACKEND_URL', variable: 'PUBLIC_BACKEND_URL')
+                    ])
                     sh 'npm install'
                     // sh 'npm run test'  // Jest testing
-                    sh 'npm run build'
+                    sh 'npm run build --build-arg PUBLIC_BACKEND_URL=${PUBLIC_BACKEND_URL}'
                 }
             }
         }
@@ -32,13 +35,22 @@ pipeline {
         stage('Build Backend') {
             steps {
                 dir(BACKEND_DIR) {
+                    //  withCredentials passes sensitive information
+                    withCredentials([
+                    string(credentialsId: 'DB_PASSWORD', variable: 'SPRING_DATASOURCE_PASSWORD')
+                ]){
+
+                    // Create secrets.properties dynamically
+                    sh '''
+                        echo "spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}" > src/main/resources/secrets.properties
+                    '''
                     sh 'mvn clean'  
                     sh 'mvn package -DskipTests'
                 }
             }
         }
 
-        stage('Docker Build and Push') {
+        stage('Deploy with Docker Compose') {
             steps {
                 script {
                     // Build and tag Docker images
@@ -49,9 +61,15 @@ pipeline {
         }
     }
 
-    // post {
-    //     always {
-    //         cleanWs() // Clean workspace after build
-    //     }
-    // }
+    post {
+        // always {
+        //     // cleanWs() // Clean workspace after build'
+        // }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
 }
