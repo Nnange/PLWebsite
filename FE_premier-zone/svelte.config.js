@@ -11,6 +11,13 @@ const config = {
 		adapter: adapter({ out: "build"}),
 		paths: {
 			base: ""
+		},
+		alias: {
+			'$components': './src/components',
+			'$lib': './src/lib',
+			'$stores': './src/stores',
+			'$interfaces': './src/interfaces',
+			'$utils': './src/utils',
 		}
 	}
 };
