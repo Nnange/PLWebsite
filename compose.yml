@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  frontend:
+    build: 
+      context: ./FE_premier-zone
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - football-network
+    environment:
+      - NODE_ENV=production
+
+  backend:
+    build: 
+      context: ./premier-zone
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - football-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+networks:
+  football-network:
+    driver: bridge
