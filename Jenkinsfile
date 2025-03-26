@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK21'
+        jdk 'JDK 21'
         maven "Maven"   // Your Maven configuration
-        nodejs "Node22" // Your NodeJS configuration
+        nodejs "NodeJS" // Your NodeJS configuration
     }
 
     environment {
