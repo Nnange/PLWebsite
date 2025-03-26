@@ -2,13 +2,16 @@ pipeline {
     agent any
 
     tools {
-        nodejs "NodeJS" // Your NodeJS configuration
+        jdk 'JDK21'
         maven "Maven"   // Your Maven configuration
+        nodejs "Node22" // Your NodeJS configuration
     }
 
     environment {
         FRONTEND_DIR = 'FE_premier-zone'
         BACKEND_DIR = 'premier-zone'
+        FRONTEND_IMAGE = "football-frontend:latest"
+        BACKEND_IMAGE = "football-backend:latest"
         // DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') // DockerHub credentials if you plan to push images
     }
 
@@ -28,6 +31,7 @@ pipeline {
                     ]) {
                     // sh 'npm run test'  // Jest testing
                         sh 'npm run build '
+                        sh 'docker build --build-arg PUBLIC_BACKEND_URL=${PUBLIC_BACKEND_URL} -t ${FRONTEND_IMAGE} .'
                     }
                 }
             }
@@ -47,6 +51,7 @@ pipeline {
                     '''
                     sh 'mvn clean'  
                     sh 'mvn package -DskipTests'
+                    sh 'docker build -t ${BACKEND_IMAGE} .'
                     }
                 }
             }
@@ -54,19 +59,28 @@ pipeline {
 
         stage('Deploy with Docker Compose') {
             steps {
-                script {
-                    // Build and tag Docker images
-                    sh 'docker-compose build'
-                    sh 'docker-compose up -d'  // Deploy on home server
+                withCredentials([
+                    string(credentialsId: 'PUBLIC_BACKEND_URL', variable: 'PUBLIC_BACKEND_URL'),
+                    string(credentialsId: 'DB_PASSWORD', variable: 'SPRING_DATASOURCE_PASSWORD')
+
+                ]){
+
+                    sh '''
+                    export PUBLIC_BACKEND_URL=${PUBLIC_BACKEND_URL}
+                    export DB_PASSWORD=${DB_PASSWORD}
+                    docker-compose down
+                    docker-compose up -d --build
+                    '''  
                 }
             }
         }
     }
 
     post {
-        // always {
+        always {
+            sh 'docker image prune -f' // Clean up images
         //     // cleanWs() // Clean workspace after build'
-        // }
+        }
         success {
             echo 'Pipeline completed successfully!'
         }

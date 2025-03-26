@@ -10,6 +10,11 @@ RUN npm install
 
 # Copy app code and build
 COPY . .
+
+# Use ARG for build-time variable
+ARG PUBLIC_BACKEND_URL
+ENV PUBLIC_BACKEND_URL=$PUBLIC_BACKEND_URL
+
 RUN npm run build
 
 # Expose port (default SvelteKit Node adapter uses 3000)
