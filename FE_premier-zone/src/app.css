@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
+body, html {
+    height: 100%;
+}
 
 @theme {
     --font-display: "Satoshi", "sans-serif";

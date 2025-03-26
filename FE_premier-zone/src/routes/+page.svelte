@@ -9,7 +9,7 @@
 </script>
 
 
-<div class="grid grid-cols-6">
+<div class="grid grid-cols-6 mb-10">
 	<div class="col-span-1"></div>
 	<div class="col-span-5 grip gap-y-4 ">
         <!-- <div class="border">

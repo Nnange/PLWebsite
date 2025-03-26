@@ -28,7 +28,7 @@
 	}
 </script>
 
-<div class="grid content-center justify-items-center gap-y-4 bg-[#74e4a5]">
+<div class="grid content-center justify-items-center gap-y-4 bg-[#74e4a5] pb-10">
 	<div class="grid w-[50%] content-center justify-items-center">
 		<p class="text-5xl">Teams</p>
 
@@ -55,8 +55,8 @@
 				on:click={() => handleOnClickTeam(team.officialName)}
 			>
 				<img
-					src={team.cover}
-					alt={team.title}
+					src={`/teams/${team.officialName}.png`}	
+					alt={`${team.title} logo`}
 					class="h-24 w-24 cursor-pointer object-contain pt-4 md:h-34 md:w-34"
 				/>
 				<strong class="cursor-pointer">{team.title}</strong>
