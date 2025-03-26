@@ -22,7 +22,7 @@ services:
     networks:
       - football-network
     environment:
-      - SPRING_PROFILES_ACTIVE=local
+      - SPRING_PROFILE=prod
 
 networks:
   football-network:
