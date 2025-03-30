@@ -19,3 +19,12 @@ export async function getPlayersOfTeam(teamName:string) {
         throw new Error("Error fetching players");
     }
 }
+export async function getPlayerDetails(playerName:string) {
+    try {
+        const response = await axios.get(`/api/v1/player?name=${playerName}`);
+        return response.data;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+        throw new Error("Error fetching players");
+    }
+}

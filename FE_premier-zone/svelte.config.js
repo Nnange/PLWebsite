@@ -18,6 +18,7 @@ const config = {
 			'$stores': './src/stores',
 			'$interfaces': './src/interfaces',
 			'$utils': './src/utils',
+			'$service': './src/service'
 		}
 	}
 };

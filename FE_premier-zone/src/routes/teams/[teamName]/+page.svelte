@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import { getPlayersOfTeam } from '../../../service/ApiFunctions.service';
+	import { goto } from '$app/navigation';
 
 	let players: any[] = [];
 	let rearrange: boolean = false; // to check if the button is clicked
@@ -24,16 +25,13 @@
 		try {
 			const response = await getPlayersOfTeam(teamName);
 			players = response;
-			console.log(categorizePlayers(players));
-            console.log(players.length);
+			categorizePlayers(players);
 		} catch (error) {
 			console.error('Failed to fetch players:', error);
 		}
 	});
 
 	function categorizePlayers(players: any[]) {
-		
-
         players.forEach(player => {
             switch (player.pos) {
                 case 'GK':
@@ -67,9 +65,12 @@
                     }
             }
         });
-
         return categories;
     }
+
+	function handleOnClickPlayer(playerName: any) {
+		goto(`/teams/${teamName}/${playerName}`); // Navigate to the specific player's route
+	}
 </script>
 
 <div class="mb-10">
@@ -92,10 +93,15 @@
 
 			<div class="grid grid-cols-3 gap-4 px-4">
 				{#each players as player}
-					<div class="grid grid-cols-2 rounded border p-4">
-						<p>{player.name}</p>
-						<p class="text-end">{player.pos}</p>
-					</div>
+					<button class="grid grid-cols-2 rounded border p-4 cursor-pointer hover:bg-gray-100"
+                        type="button"
+                        onclick={() => {
+                            handleOnClickPlayer(player.name);
+                        }}
+                    >
+						<p class="text-start">{player.name}</p>
+						<p class="text-end ">{player.pos}</p>
+					</button>
 				{/each}
 			</div>
 		{/if}
