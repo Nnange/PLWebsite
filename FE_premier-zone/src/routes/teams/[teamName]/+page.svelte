@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { getPlayersOfTeam } from '../../../service/ApiFunctions.service';
 	import { goto } from '$app/navigation';
+	import Spinner from '$components/Spinner.svelte';
 
 	let players: any[] = [];
 	let rearrange: boolean = false; // to check if the button is clicked
@@ -85,7 +86,6 @@
 				class="my-4 ml-4 cursor-pointer rounded-lg border border-orange-500 p-2 text-orange-500"
 				onclick={() => {
 					rearrange = !rearrange;
-					console.log(players);
 				}}
 			>
 				Rearrange according to their positions
@@ -106,7 +106,7 @@
 			</div>
 		{/if}
 	{:else}
-		<p class="text-5xl">Loading...</p>
+        <Spinner height={70} width={70} />
 	{/if}
 
 	{#if rearrange}
@@ -115,12 +115,12 @@
 			class="my-4 ml-4 cursor-pointer rounded-lg border border-orange-500 p-2 text-orange-500"
 			onclick={() => {
 				rearrange = !rearrange;
-				console.log(players);
 			}}
 		>
 			Go back to default listing
 		</button>
-		<div class="grid grid-cols-4">
+        {#if players}
+        <div class="grid grid-cols-4">
             <div class="text-center">
                 <strong class="text-2xl underline">Goalkeepers</strong>
                 {#each categories.Goalkeepers as player}
@@ -154,5 +154,8 @@
                 {/each}
             </div>
         </div>
+        {:else}
+            <Spinner height={70} width={70} />
+        {/if}	
 	{/if}
 </div>
