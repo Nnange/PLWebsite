@@ -2,10 +2,10 @@
     const currentYear = new Date().getFullYear();
 </script>
 
-<footer class="footer">
+<footer class="footer text-sm sm:text-md">
     <div class="container">
         <p>&copy; {currentYear} Premier Zone. All rights reserved.</p>
-        <nav>
+        <nav class="">
             <a href="/privacy-policy">Privacy Policy</a>
             <a href="/terms-of-service">Terms of Service</a>
             <a href="/contact">Contact Us</a>

@@ -4,8 +4,9 @@
 	import { getPlayersOfTeam } from '../../../service/ApiFunctions.service';
 	import { goto } from '$app/navigation';
 	import Spinner from '$components/Spinner.svelte';
+	import { players } from '$stores/teams.store';
 
-	let players: any[] = [];
+	// let players: any[] = [];
 	let rearrange: boolean = false; // to check if the button is clicked
 	let teamName: string;
 
@@ -25,8 +26,9 @@
 		teamName = page.params.teamName;
 		try {
 			const response = await getPlayersOfTeam(teamName);
-			players = response;
-			categorizePlayers(players);
+			$players = response;
+            console.log($players)
+			categorizePlayers($players);
 		} catch (error) {
 			console.error('Failed to fetch players:', error);
 		}
@@ -79,7 +81,7 @@
 		<img src={`/teams/${teamName}.png`} alt={`${teamName} logo`} width="100px" />
 		<h1 class="text-4xl">{teamName}'s squad</h1>
 	</div>
-	{#if players}
+	{#if $players}
 		{#if !rearrange}
 			<button
 				type="button"
@@ -92,7 +94,7 @@
 			</button>
 
 			<div class="grid grid-cols-3 gap-4 px-4">
-				{#each players as player}
+				{#each $players as player}
 					<button class="grid grid-cols-2 rounded border p-4 cursor-pointer hover:bg-gray-100"
                         type="button"
                         onclick={() => {
@@ -119,7 +121,7 @@
 		>
 			Go back to default listing
 		</button>
-        {#if players}
+        {#if $players}
         <div class="grid grid-cols-4">
             <div class="text-center">
                 <strong class="text-2xl underline">Goalkeepers</strong>
