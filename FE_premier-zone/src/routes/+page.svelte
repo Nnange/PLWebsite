@@ -13,7 +13,7 @@
 	<div class="col-span-1"></div>
 	<div class="col-span-5 grip gap-y-4 ">
         <div class="">
-            <img src="images/premierLeagueLogo.png" alt="premierLeagueLogo" class="w-40 sm:w-63">
+            <img src="/images/premierLeagueLogo.png" alt="premierLeagueLogo" class="w-40 sm:w-63">
         </div>
         
 		<p class="text-3xl sm:text-5xl">Welcome to </p>

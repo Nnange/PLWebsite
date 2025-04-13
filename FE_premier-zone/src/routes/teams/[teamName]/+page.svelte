@@ -33,6 +33,7 @@
 			console.error('Failed to fetch players:', error);
 		}
 	});
+    // $: console.log($players);
 
 	function categorizePlayers(players: any[]) {
         players.forEach(player => {
@@ -122,40 +123,40 @@
 			Go back to default listing
 		</button>
         {#if $players}
-        <div class="grid grid-cols-4">
-            <div class="text-center">
-                <strong class="text-2xl underline">Goalkeepers</strong>
-                {#each categories.Goalkeepers as player}
-                    <div class=" ">
-                        <p>{player.name}</p>
-                    </div>
-                {/each}
+            <div class="grid grid-cols-4">
+                <div class="text-center">
+                    <strong class="text-2xl underline">Goalkeepers</strong>
+                    {#each categories.Goalkeepers as player}
+                        <div class=" ">
+                            <p>{player.name}</p>
+                        </div>
+                    {/each}
+                </div>
+                <div class="text-center">
+                    <strong class="text-2xl underline">Defenders</strong>
+                    {#each categories.Defenders as player}
+                        <div class=" ">
+                            <p>{player.name}</p>
+                        </div>
+                    {/each}
+                </div>
+                <div class="text-center">
+                    <strong class="text-2xl underline">Midfielders</strong>
+                    {#each categories.Midfielders as player}
+                        <div class=" ">
+                            <p>{player.name}</p>
+                        </div>
+                    {/each}
+                </div>
+                <div class="text-center">
+                    <strong class="text-2xl underline">Strikers</strong>
+                    {#each categories.Strikers as player}
+                        <div class=" ">
+                            <p>{player.name}</p>
+                        </div>
+                    {/each}
+                </div>
             </div>
-            <div class="text-center">
-                <strong class="text-2xl underline">Defenders</strong>
-                {#each categories.Defenders as player}
-                    <div class=" ">
-                        <p>{player.name}</p>
-                    </div>
-                {/each}
-            </div>
-            <div class="text-center">
-                <strong class="text-2xl underline">Midfielders</strong>
-                {#each categories.Midfielders as player}
-                    <div class=" ">
-                        <p>{player.name}</p>
-                    </div>
-                {/each}
-            </div>
-            <div class="text-center">
-                <strong class="text-2xl underline">Strikers</strong>
-                {#each categories.Strikers as player}
-                    <div class=" ">
-                        <p>{player.name}</p>
-                    </div>
-                {/each}
-            </div>
-        </div>
         {:else}
             <Spinner height={70} width={70} />
         {/if}	

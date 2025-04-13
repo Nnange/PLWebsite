@@ -5,3 +5,5 @@ import type { Player } from '$interfaces/player.interface';
 export const teams = writable<Team[]>([]);
 
 export const players = writable<Player[]>([]);
+
+export const playerData = writable<Player[]>([]);
