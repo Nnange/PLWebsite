@@ -35,8 +35,8 @@
             <p></p> -->
         </div>
 
-        <div class="grid grid-cols-12 gap-4 mt-4">
-            <div class="grid col-span-4 border rounded-lg shadow-md">
+        <div class="grid grid-cols-12 gap-4 m-4">
+            <div class="grid col-span-12 sm:col-span-4 border rounded-lg shadow-md">
                 <div class="grid grid-cols-2 gap-4 p-4">
                     <div class="col-span-1 ">Age</div>
                     <div class="col-span-1 text-end">{$playerData[0]?.age}</div>
@@ -51,7 +51,7 @@
                 </div>
 
             </div>
-            <div class="grid grid-cols-4 col-span-8 gap-4">
+            <div class="grid col-span-12 sm:col-span-8 grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-4">
                 <div class="flex flex-col items-center justify-center border rounded-lg shadow-md p-1">
                     <span>Starts</span>
                     <CountUp target={$playerData[0]?.starts} duration={1000} decimals={0} />
