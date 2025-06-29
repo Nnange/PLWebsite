@@ -66,6 +66,8 @@ pipeline {
                 ]){
 
                     sh '''
+                    echo $SPRING_DATASOURCE_PASSWORD > tmp
+                    cat tmp
                     export PUBLIC_BACKEND_URL=${PUBLIC_BACKEND_URL}
                     export DB_PASSWORD=${DB_PASSWORD}
                     docker-compose down
